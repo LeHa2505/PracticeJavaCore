@@ -17,14 +17,9 @@ public class InventoryManagement {
     public void addGoods() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Choose the type of goods to add:");
-        System.out.println("1. Electronics");
-        System.out.println("2. Food");
-        System.out.println("3. Crockery");
-
-        int choice = scanner.nextInt(); //Consume newline
-        System.out.println("Type the product code: ");
+        System.out.print("Type the product code: ");
         int newProductCode = scanner.nextInt();
+        scanner.nextLine();
 
         //check duplicate
         for (Goods good: productList) {
@@ -34,47 +29,55 @@ public class InventoryManagement {
             }
         }
 
-        System.out.println("Type the name: ");
+        System.out.print("Type the name: ");
         String newProductName = scanner.nextLine();
-        System.out.println("Type the quantity: ");
+        System.out.print("Type the quantity: ");
         int newProductQuantity = scanner.nextInt();
-        System.out.println("Type the unit price: ");
+        scanner.nextLine(); // Xử lý newline còn lại
+        System.out.print("Type the unit price: ");
         int newProductUnitPrice = scanner.nextInt();
+        scanner.nextLine();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+        System.out.println("1. Electronics");
+        System.out.println("2. Food");
+        System.out.println("3. Crockery");
+        System.out.print("Choose the type of goods to add: ");
+        int choice =  scanner.nextInt();
+        scanner.nextLine(); //Consume newline
 
         switch (choice) {
             case 1:
-                System.out.println("Type the warranty period (months): ");
+                System.out.print("Type the warranty period (months): ");
                 int newWarrantyPeriod = scanner.nextInt();
 
-                System.out.println("Type the capacity (KW): ");
+                System.out.print("Type the capacity (KW): ");
                 int newCapacity = scanner.nextInt();
 
                 Electronic electronic = new Electronic(newProductCode, newProductName, newProductQuantity, newProductUnitPrice, newWarrantyPeriod, newCapacity);
                 productList.add(electronic);
                 break;
             case 2:
-                System.out.println("Type the manufacture date (dd-MM-yyyy): ");
+                System.out.print("Type the manufacture date (dd-MM-yyyy): ");
                 String inputNewManufactureDate = scanner.nextLine();
                 LocalDate newManufactureDate = LocalDate.parse(inputNewManufactureDate, formatter);
 
-                System.out.println("Type the expiration date (dd-MM-yyyy): ");
+                System.out.print("Type the expiration date (dd-MM-yyyy): ");
                 String inputNewExpirationDate = scanner.nextLine();
                 LocalDate newExpirationDate = LocalDate.parse(inputNewExpirationDate, formatter);
 
-                System.out.println("Type the supplier: ");
+                System.out.print("Type the supplier: ");
                 String newSupplier = scanner.nextLine();
 
                 Food food = new Food(newProductCode, newProductName, newProductQuantity, newProductUnitPrice, newManufactureDate, newExpirationDate, newSupplier);
                 productList.add(food);
                 break;
             case 3:
-                System.out.println("Type the manufacture information: ");
+                System.out.print("Type the manufacture information: ");
                 String newManufactureInfo = scanner.nextLine();
 
-                System.out.println("Type the date of arrival: ");
+                System.out.print("Type the date of arrival: ");
                 String inputNewArrivalDate = scanner.nextLine();
                 LocalDate newArrivalDate = LocalDate.parse(inputNewArrivalDate, formatter);
 
@@ -83,6 +86,7 @@ public class InventoryManagement {
                 break;
             default:
                 System.out.println("Invalid choice.");
+                return;
         }
         System.out.println("Goods added successfully.");
     }

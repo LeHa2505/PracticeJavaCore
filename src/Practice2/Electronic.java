@@ -2,10 +2,10 @@ package Practice2;
 
 public class Electronic extends Goods {
     private int warrantyPeriod;
-    private int capacity;
+    private double capacity;
 
     public Electronic(int code, String name, int quantity, double unitPrice,
-                      int warrantyPeriod, int capacity) {
+                      int warrantyPeriod, double capacity) {
         super(code, name, quantity, unitPrice);
         if (warrantyPeriod < 0 || capacity < 0) {
             throw new IllegalArgumentException("IllegalArgumentException");
